@@ -54,8 +54,15 @@ public class UserEntity {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", company="
+				+ company + "]";
+	}
 	public User buildDomain() { // Entity -> Domain
 		User user = new User();
+		user.setId(id);
 		user.setUserId(userId);
 		user.setUserPw(userPw);
 		user.setName(name);
@@ -64,6 +71,7 @@ public class UserEntity {
 	}
 	
 	public void buildEntity(User user) { // Domain -> Entity
+		id = user.getId();
 		userId = user.getUserId();
 		userPw = user.getUserPw();
 		name = user.getName();

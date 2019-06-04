@@ -37,4 +37,5 @@ public class User {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	
 }

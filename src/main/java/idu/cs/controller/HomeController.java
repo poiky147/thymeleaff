@@ -37,13 +37,13 @@ public class HomeController {
 	public String loginForm() {		
 		return "login";
 	}
-	/*
+	
 	@PostMapping("/login") 
 	// 실제로 로그인 처리, user : 입력한 내용에 대한 객체, 
 	// sessionUser : 리파지터리로부터 가져온 내용의 객체
 	public String loginUser(@Valid UserEntity user, HttpSession session) {		
 		System.out.println("login process : ");
-		UserEntity sessionUser = userRepo.findByUserId(user.getUserId());
+		User sessionUser = userService.getUserByUserId(user.getUserId());//userRepo.findByUserId(user.getUserId());
 		if(sessionUser == null) {
 			System.out.println("id error : ");
 			return "redirect:/login-form";
@@ -61,7 +61,7 @@ public class HomeController {
 		session.removeAttribute("user");
 		return "redirect:/";
 	}	
-	*/
+	
 	@GetMapping("/users")
 	public String getAllUser(Model model) {
 		model.addAttribute("users", userService.getUsers());
@@ -81,16 +81,16 @@ public class HomeController {
 		model.addAttribute("users", users);
 		return "userlist";
 	}
+	*/
 	@GetMapping("/users/{id}")
 	public String getUserById(@PathVariable(value = "id") Long userId,  
 	Model model) throws ResourceNotFoundException {
-		UserEntity user = userRepo.findById(userId)
-				.orElseThrow(() -> 
-				new ResourceNotFoundException("not found " + userId ));
+		User user = userService.getUser(userId);
+				//userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("not found " + userId ));
 		model.addAttribute("user", user);
 		return "info";
 	}
-	*/
+	
 	@GetMapping("/register-form")
 	public String loadRegForm(Model model) {		
 		return "register";
